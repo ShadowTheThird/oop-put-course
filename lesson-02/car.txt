@@ -1,0 +1,6 @@
+1992 82.713 Civic Honda
+2001 1842.7 Camry Toyota
+2012 6782.335 Mustang Ford
+2020 512.805 3 BMW
+2019 708.092 Optima Kia
+2016 32.112 A4 Audi
