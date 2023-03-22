@@ -1,5 +1,4 @@
 #include <iostream>
-#include <typeinfo>
 #include <cxxabi.h>
 using namespace std;
 
@@ -40,26 +39,3 @@ void Animal::Check(){
     cout << "you have " << quantity << " " << name << "s on your farm" << endl;
 }
 
-class Cow:public Animal{
-public:
-    Cow(int n){
-        quantity = n;
-        name = SubConstructor(n, typeid(*this).name());
-    }
-};
-
-class Chicken:public Animal{
-public:
-    Chicken(int n){
-        quantity = n;
-        name = SubConstructor(n, typeid(*this).name());
-    }
-};
-
-class Sheep:public Animal{
-public:
-    Sheep(int n){
-        quantity = n;
-        name = SubConstructor(n, typeid(*this).name());
-    }
-};

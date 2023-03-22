@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Animal.h"
+#include "SpecifiedAnimals.h"
 using namespace std;
 
 class Farm{
