@@ -50,7 +50,7 @@ void Help::ShowHelp(){
 void Help::FindTooltip(string name){
     string commands[7] = {"help", "sleep", "check", "buy", "sell", "id", "exit"};
     bool command_found = false;
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < 7; i++){
         if(name == commands[i]){
             ShowTooltip(i);
             command_found = true;
