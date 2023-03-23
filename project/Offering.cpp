@@ -4,13 +4,6 @@
 using namespace std;
 
 bool is_a_number(string line){
-    // int i = 0, length = line.length();
-    // while(i < length){
-    //     if(!isdigit(line[i])){
-    //         return false;
-    //     }
-    // }
-    // return true;
     for(char c : line){
         if(!isdigit(c)){
             return false;
