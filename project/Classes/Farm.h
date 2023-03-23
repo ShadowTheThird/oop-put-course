@@ -11,6 +11,9 @@ public:
     void Check();
     void Sleep();
     bool IsAlive();
+    void Purchase(bool, int, int);
+    bool Exists(string);
+    int FindId(string);
 };
 
 Farm::Farm(string name){
@@ -50,4 +53,31 @@ bool Farm::IsAlive(){
         }
     }
     return false;
+}
+
+void Farm::Purchase(bool is_food, int id, int n){
+    if(is_food){
+        livestock[id]->AddFood(n);
+    }
+    else{
+        livestock[id]->AddAnimal(n);
+    }
+}
+
+bool Farm::Exists(string name){
+    for(int i = 0; i < animal_types; i++){
+        if(livestock[i]->IsAnimalOrFood(name)){
+            return true;
+        }
+    }
+    return false;
+}
+
+int Farm::FindId(string name){
+    for(int i = 0; i < animal_types; i++){
+        if(livestock[i]->IsMyName(name)){
+            return i;
+        }
+    }
+    return -1;
 }

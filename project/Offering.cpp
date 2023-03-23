@@ -2,15 +2,6 @@
 #include "Classes\Farm.h"
 using namespace std;
 
-void lower(string *line){
-    string lower = "";
-    int a = line->length();
-    for(int i = 0; i < a; i++){
-        lower += tolower((*line)[i]);
-    }
-    *line = lower;
-}
-
 bool is_a_number(string line){
     // int i = 0, length = line.length();
     // while(i < length){
@@ -28,7 +19,7 @@ bool is_a_number(string line){
 }
 
 void show_help(){
-    cout << "\thelp - offers insight for available commands" << endl << "\tsleep - skips on to the next cycle" << endl << "\tcheck - checks the status of your farm" << endl << "\tbuy - purchases specified food or animal" << endl << "\texit - ends the process";
+    cout << "\thelp - offers insight for available commands" << endl << "\tsleep - skips on to the next cycle" << endl << "\tcheck - checks the status of your farm" << endl << "\tbuy - purchases specified food or animal" << endl << "\texit - ends the process" << endl;
 }
 
 string next_instance(string *line){
@@ -53,9 +44,10 @@ int main(){
     cin >> command;
     Farm farm(command);
     cout << "input commands to play. You can use \"help\" command to see available commands" << endl;
+    getline(cin, command);
     while(farm.IsAlive()){
         getline(cin, command);
-        lower(&command);
+        Animal::Lower(&command);
         if(command == "help"){
             show_help();
             continue;
@@ -69,10 +61,23 @@ int main(){
             continue;
         }
         if(command.substr(0, 3) == "buy"){
-            if(next_instance(&command) == "rabbitfood"){
-                string number = next_instance(&command);
-                if(is_a_number(number)){
-                    // cout << "\tyou have purchased " << stoi(number) << " rabbitfood" << endl;
+            string instance = next_instance(&command);
+            if(farm.Exists(instance)){
+                bool is_food = false;
+                if(instance.length() > 5){
+                    if(instance.substr(instance.length()-5, 4) == "food"){
+                        is_food = true;
+                        instance = instance.substr(0, instance.length()-4);
+                    }
+                }
+                int id = farm.FindId(instance);
+                if(id == -1){
+                    cout << "\tfatal error in id search" << endl;
+                    continue;
+                }
+                instance = next_instance(&command);
+                if(is_a_number(instance)){
+                    farm.Purchase(is_food, id, stoi(instance));
                     continue;
                 }
                 cout << "\tamount specifier required" << endl;
