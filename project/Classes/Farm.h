@@ -5,6 +5,7 @@ using namespace std;
 class Farm{
     string farm_name;
     unsigned short animal_types;
+    unsigned int credits;
     Animal **livestock;
 public:
     Farm(string);
@@ -12,12 +13,14 @@ public:
     void Sleep();
     bool IsAlive();
     void Purchase(bool, int, int);
+    void Sell(int, int);
     bool Exists(string);
     int FindId(string);
 };
 
 Farm::Farm(string name){
     farm_name = name;
+    credits = 10;
     animal_types = 7;
     livestock = new Animal*[animal_types];
     livestock[0] = new Cow(0, 0);
@@ -30,7 +33,7 @@ Farm::Farm(string name){
 }
 
 void Farm::Check(){
-    cout << farm_name << " farm state:" << endl;
+    cout << farm_name << " has balance of " << credits << "$ and livestock state of:" << endl;
     for(int i = 0; i < animal_types; i++){
         if(livestock[i]->Present()){
             livestock[i]->Check();
@@ -57,16 +60,38 @@ bool Farm::IsAlive(){
 
 void Farm::Purchase(bool is_food, int id, int n){
     if(is_food){
-        livestock[id]->AddFood(n);
+        if(credits >= livestock[id]->EvaluateFoodCost(n)){
+            credits -= livestock[id]->EvaluateFoodCost(n);
+            livestock[id]->AddFood(n);
+        }
+        else{
+            cout << "\tinsufficient credits" << endl;
+        }
     }
     else{
-        livestock[id]->AddAnimal(n);
+        if(credits >= livestock[id]->EvaluateAnimalCost(n)){
+            credits -= livestock[id]->EvaluateAnimalCost(n);
+            livestock[id]->AddAnimal(n);
+        }
+        else{
+            cout << "\tinsufficient credits" << endl;
+        }
+    }
+}
+
+void Farm::Sell(int id, int n){
+    if(livestock[id]->RemoveAnimal(n)){
+        cout << "you have sold " << n << " " << livestock[id]->Name() << "s for " << livestock[id]->SellAnimal(n) << "$" << endl;
+        credits += livestock[id]->SellAnimal(n);
+    }
+    else{
+        cout << "sale was unsuccessful because there is less than " << n << " " << livestock[id]->Name() << "s on " << farm_name << endl;
     }
 }
 
 bool Farm::Exists(string name){
     for(int i = 0; i < animal_types; i++){
-        if(livestock[i]->IsAnimalOrFood(name)){
+        if(livestock[i]->IsMyName(name)){
             return true;
         }
     }

@@ -62,14 +62,14 @@ int main(){
         }
         if(command.substr(0, 3) == "buy"){
             string instance = next_instance(&command);
-            if(farm.Exists(instance)){
-                bool is_food = false;
+            bool is_food = false;
                 if(instance.length() > 5){
-                    if(instance.substr(instance.length()-5, 4) == "food"){
+                    if(instance.substr(instance.length()-4) == "food"){
                         is_food = true;
                         instance = instance.substr(0, instance.length()-4);
                     }
                 }
+            if(farm.Exists(instance)){
                 int id = farm.FindId(instance);
                 if(id == -1){
                     cout << "\tfatal error in id search" << endl;
@@ -78,6 +78,25 @@ int main(){
                 instance = next_instance(&command);
                 if(is_a_number(instance)){
                     farm.Purchase(is_food, id, stoi(instance));
+                    continue;
+                }
+                cout << "\tamount specifier required" << endl;
+                continue;
+            }
+            cout << "\tfood or animal identifier required" << endl;
+            continue;
+        }
+        if(command.substr(0,4) == "sell"){
+            string instance = next_instance(&command);
+            if(farm.Exists(instance)){
+                int id = farm.FindId(instance);
+                if(id == -1){
+                    cout << "\tfatal error in id search" << endl;
+                    continue;
+                }
+                instance = next_instance(&command);
+                if(is_a_number(instance)){
+                    farm.Sell(id, stoi(instance));
                     continue;
                 }
                 cout << "\tamount specifier required" << endl;

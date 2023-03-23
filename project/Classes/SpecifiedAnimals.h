@@ -48,5 +48,8 @@ class Rabbit:public Animal{
 public:
     Rabbit(int n, int fn){
         SubConstructor(n, fn, typeid(*this).name());
+        cost = 4;
+        food_cost = 1;
+        sell = 3;
     }
 };

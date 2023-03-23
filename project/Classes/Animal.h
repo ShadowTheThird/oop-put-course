@@ -5,7 +5,7 @@ using namespace std;
 class Animal{
 protected:
     string name, food;
-    unsigned int quantity, food_quantity, starved = 0;
+    unsigned int quantity, food_quantity, starved = 0, cost = 0, food_cost = 0, sell = 0;
     void SubConstructor(int, int, const char*); // used for constructing derived classes
     int Feed();                                 // determines how many animals will be fed this cycle
 public:
@@ -14,11 +14,16 @@ public:
     void Check();                               // prints out animal quantity and food quantity provided the quantity is not 0
     bool Present();                             // checks if given animal has a quantity above 0
     void Reproduce();                           // uses Feed() to determin how many animals will take part in reproduction cycle
-    void AddFood(int);
-    void AddAnimal(int);                         // increases food_quantity by the value of argument
-    bool IsAnimalOrFood(string);
-    bool IsMyName(string);
-    static void Lower(string*);
+    void AddFood(int);                          // increases food_quantity by the value of argument
+    void AddAnimal(int);                        // increases animal quantity by the value of argument
+    // bool IsAnimalOrFood(string);                // checks if string is an animal name or food name
+    bool IsMyName(string);                      // checks if string is this animals name
+    int EvaluateFoodCost(int);                  // returns the cost of buying 'argument' food products
+    int EvaluateAnimalCost(int);                // returns the cost of buying 'argument animals
+    bool RemoveAnimal(int);                     // checks if quantity is bigger-equal arguments value and lowers animal quantity by the value of argument if it is
+    int SellAnimal(int);                        // evaluates the gains from selling 'argument' animals
+    string Name();                              // returns animal name
+    static void Lower(string*);                 // converts string to a lowercase variant of that string
 };
 
 int Animal::Feed(){
@@ -99,18 +104,18 @@ void Animal::AddAnimal(int n){
     cout << "you have purchased " << n << " " << name << "s" << endl;
 }
 
-bool Animal::IsAnimalOrFood(string name){
-    string animal_name = this->name, food_name = food;
-    Lower(&animal_name);
-    Lower(&food_name);
-    if(name == animal_name){
-        return true;
-    }
-    if(name == food_name){
-        return true;
-    }
-    return false;
-}
+// bool Animal::IsAnimalOrFood(string name){
+//     string animal_name = this->name, food_name = food;
+//     Lower(&animal_name);
+//     Lower(&food_name);
+//     if(name == animal_name){
+//         return true;
+//     }
+//     if(name == food_name){
+//         return true;
+//     }
+//     return false;
+// }
 
 bool Animal::IsMyName(string name){
     string animal_name = this->name;
@@ -119,6 +124,30 @@ bool Animal::IsMyName(string name){
         return true;
     }
     return false;
+}
+
+int Animal::EvaluateFoodCost(int n){
+    return food_cost * n;
+}
+
+int Animal::EvaluateAnimalCost(int n){
+    return cost * n;
+}
+
+bool Animal::RemoveAnimal(int n){
+    if(quantity >= n){
+        quantity -= n;
+        return true;
+    }
+    return false;
+}
+
+int Animal::SellAnimal(int n){
+    return sell * n;
+}
+
+string Animal::Name(){
+    return name;
 }
 
 void Animal::Lower(string *line){
