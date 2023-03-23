@@ -108,6 +108,10 @@ int main(){
             cout << "\tfood or animal identifier required" << endl;
             continue;
         }
+        if(command == "id"){
+            cout << "\tanimal-id: Bee, Chicken, Cow, Dog, Pig, Rabbit, Sheep" << endl << "\tfood-id: Beefood, Chickenfood, Cowfood, Dogfood, Pigfood, Rabbitfood, Sheepfood" << endl;
+            continue;
+        }
         if(command == "exit"){
             return 0;
         }
