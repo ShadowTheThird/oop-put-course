@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Classes\Farm.h"
+#include "Classes\Help.h"
 using namespace std;
 
 bool is_a_number(string line){
@@ -16,10 +17,6 @@ bool is_a_number(string line){
         }
     }
     return true;
-}
-
-void show_help(){
-    cout << "\thelp - offers insight for available commands" << endl << "\tsleep - skips on to the next cycle" << endl << "\tcheck - checks the status of your farm" << endl << "\tbuy - purchases specified food or animal" << endl << "\texit - ends the process" << endl;
 }
 
 string next_instance(string *line){
@@ -48,9 +45,15 @@ int main(){
     while(farm.IsAlive()){
         getline(cin, command);
         Animal::Lower(&command);
-        if(command == "help"){
-            show_help();
-            continue;
+        if(command.substr(0,4) == "help"){
+            if(command.length() == 4){
+                Help::ShowHelp();
+                continue;
+            }
+            else{
+                Help::FindTooltip(next_instance(&command));
+                continue;
+            }
         }
         if(command == "sleep"){
             farm.Sleep();
