@@ -60,8 +60,8 @@ bool Farm::IsAlive(){
 
 void Farm::Purchase(bool is_food, int id, int n){
     if(is_food){
-        if(credits >= livestock[id]->EvaluateFoodCost(n)){
-            credits -= livestock[id]->EvaluateFoodCost(n);
+        if(credits >= livestock[id]->EvaluateFoodPrice(n)){
+            credits -= livestock[id]->EvaluateFoodPrice(n);
             livestock[id]->AddFood(n);
         }
         else{
@@ -69,8 +69,8 @@ void Farm::Purchase(bool is_food, int id, int n){
         }
     }
     else{
-        if(credits >= livestock[id]->EvaluateAnimalCost(n)){
-            credits -= livestock[id]->EvaluateAnimalCost(n);
+        if(credits >= livestock[id]->EvaluateAnimalPrice(n)){
+            credits -= livestock[id]->EvaluateAnimalPrice(n);
             livestock[id]->AddAnimal(n);
         }
         else{

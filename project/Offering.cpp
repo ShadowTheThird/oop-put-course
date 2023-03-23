@@ -86,7 +86,7 @@ int main(){
             cout << "\tfood or animal identifier required" << endl;
             continue;
         }
-        if(command.substr(0,4) == "sell"){
+        if(command.substr(0,4) == "sell_price"){
             string instance = next_instance(&command);
             if(farm.Exists(instance)){
                 int id = farm.FindId(instance);

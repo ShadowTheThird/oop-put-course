@@ -5,7 +5,7 @@ using namespace std;
 class Animal{
 protected:
     string name, food;
-    unsigned int quantity, food_quantity, starved = 0, cost = 0, food_cost = 0, sell = 0;
+    unsigned int quantity, food_quantity, starved = 0, price = 0, food_price = 0, sell_price = 0;
     void SubConstructor(int, int, const char*); // used for constructing derived classes
     int Feed();                                 // determines how many animals will be fed this cycle
 public:
@@ -18,10 +18,10 @@ public:
     void AddAnimal(int);                        // increases animal quantity by the value of argument
     // bool IsAnimalOrFood(string);                // checks if string is an animal name or food name
     bool IsMyName(string);                      // checks if string is this animals name
-    int EvaluateFoodCost(int);                  // returns the cost of buying 'argument' food products
-    int EvaluateAnimalCost(int);                // returns the cost of buying 'argument animals
+    int EvaluateFoodPrice(int);                  // returns the price of buying 'argument' food products
+    int EvaluateAnimalPrice(int);                // returns the price of buying 'argument animals
     bool RemoveAnimal(int);                     // checks if quantity is bigger-equal arguments value and lowers animal quantity by the value of argument if it is
-    int SellAnimal(int);                        // evaluates the gains from selling 'argument' animals
+    int SellAnimal(int);                        // evaluates the gains from sell_priceing 'argument' animals
     string Name();                              // returns animal name
     static void Lower(string*);                 // converts string to a lowercase variant of that string
 };
@@ -96,12 +96,12 @@ void Animal::Reproduce(){
 
 void Animal::AddFood(int n){
     food_quantity += n;
-    cout << "you have purchased " << n << " " << food << endl;
+    cout << "you have purchased " << n << " " << food << " for " << food_price*n << "$" << endl;
 }
 
 void Animal::AddAnimal(int n){
     quantity += n;
-    cout << "you have purchased " << n << " " << name << "s" << endl;
+    cout << "you have purchased " << n << " " << name << "s for " << price*n << "$" << endl;
 }
 
 // bool Animal::IsAnimalOrFood(string name){
@@ -126,12 +126,12 @@ bool Animal::IsMyName(string name){
     return false;
 }
 
-int Animal::EvaluateFoodCost(int n){
-    return food_cost * n;
+int Animal::EvaluateFoodPrice(int n){
+    return food_price * n;
 }
 
-int Animal::EvaluateAnimalCost(int n){
-    return cost * n;
+int Animal::EvaluateAnimalPrice(int n){
+    return price * n;
 }
 
 bool Animal::RemoveAnimal(int n){
@@ -143,7 +143,7 @@ bool Animal::RemoveAnimal(int n){
 }
 
 int Animal::SellAnimal(int n){
-    return sell * n;
+    return sell_price * n;
 }
 
 string Animal::Name(){
