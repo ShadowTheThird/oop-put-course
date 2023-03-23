@@ -18,10 +18,10 @@ public:
     void AddAnimal(int);                        // increases animal quantity by the value of argument
     // bool IsAnimalOrFood(string);                // checks if string is an animal name or food name
     bool IsMyName(string);                      // checks if string is this animals name
-    int EvaluateFoodPrice(int);                  // returns the price of buying 'argument' food products
-    int EvaluateAnimalPrice(int);                // returns the price of buying 'argument animals
+    int EvaluateFoodPrice(int);                 // returns the cost of buying 'argument' food products
+    int EvaluateAnimalPrice(int);               // returns the cost of buying 'argument animals
     bool RemoveAnimal(int);                     // checks if quantity is bigger-equal arguments value and lowers animal quantity by the value of argument if it is
-    int SellAnimal(int);                        // evaluates the gains from sell_priceing 'argument' animals
+    int SellAnimal(int);                        // evaluates the gains from selling 'argument' animals
     string Name();                              // returns animal name
     static void Lower(string*);                 // converts string to a lowercase variant of that string
 };
