@@ -9,6 +9,7 @@ class Farm{
     Animal **livestock;
 public:
     Farm(string);
+    ~Farm();
     void Check();
     void Sleep();
     bool IsAlive();
@@ -30,6 +31,10 @@ Farm::Farm(string name){
     livestock[4] = new Dog(0, 0);
     livestock[5] = new Rabbit(10, 20);
     livestock[6] = new Bee(0, 0); 
+}
+
+Farm::~Farm(){
+    delete(livestock);
 }
 
 void Farm::Check(){
