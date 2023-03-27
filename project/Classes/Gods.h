@@ -9,7 +9,7 @@ public:
     Gods();
     ~Gods();
     bool ActiveMission();
-    void ChooseMission();
+    void ChooseMission(int);
 };
 
 Gods::Gods():offering_score(0){
@@ -29,4 +29,16 @@ bool Gods::ActiveMission(){
         }
     }
     return false;
+}
+
+void Gods::ChooseMission(int slot){
+    Quest choices[3] = {Quest("mission1", "rabbit", 10, 5), Quest("mission1", "rabbit", 20, 10), Quest("mission1", "rabbit", 5, 2)};
+    cout << "chose your offering:" << endl;
+    for(int i = 0; i < 3; i++){
+        cout << "\t" << i << ". ";
+        choices[i].DisplayQuest();
+    }
+    int n;
+    cin >> n;
+    active_missions[slot] = &choices[n];
 }
