@@ -10,6 +10,7 @@ public:
     ~Gods();
     bool ActiveMission();
     void ChooseMission(int);
+    void DisplayMissions();
 };
 
 Gods::Gods():offering_score(0){
@@ -40,5 +41,18 @@ void Gods::ChooseMission(int slot){
     }
     int n;
     cin >> n;
-    active_missions[slot] = &choices[n];
+    active_missions[--slot] = &choices[n];
+}
+
+void Gods::DisplayMissions(){
+    cout << "your active missions:" << endl;
+    for(int i = 0; i < 3; i++){
+        cout << "\t" << i << ". ";
+        if(active_missions[i] == NULL){
+            cout << "EMPTY" << endl;
+        }
+        else{
+            active_missions[i]->DisplayQuest();
+        }
+    }
 }
