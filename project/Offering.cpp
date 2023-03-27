@@ -31,11 +31,13 @@ string next_instance(string *line){
 int main(){
     string command;
     cout << "input farm name:\t";
-    cin >> command;
+    getline(cin, command);
     Farm farm(command);
     cout << "input commands to play. You can use \"help\" command to see available commands" << endl;
-    getline(cin, command);
     while(farm.IsAlive()){
+        if(!farm.ActiveMission()){
+            farm.ChooseMission(1);
+        }
         getline(cin, command);
         Animal::Lower(&command);
         if(command.substr(0,4) == "help"){
@@ -54,6 +56,10 @@ int main(){
         }
         if(command == "check"){
             farm.Check();
+            continue;
+        }
+        if(command == "mission"){
+            farm.DisplayMissions();
             continue;
         }
         if(command.substr(0, 3) == "buy"){

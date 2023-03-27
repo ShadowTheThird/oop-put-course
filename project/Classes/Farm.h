@@ -1,12 +1,15 @@
 #include <iostream>
+#include <cstdlib>
 #include "SpecifiedAnimals.h"
+#include "Gods.h"
 using namespace std;
 
-class Farm{
+class Farm:public Gods{
     string farm_name;
     unsigned short animal_types;
     unsigned int credits;
     Animal **livestock;
+    void Offer(int);
 public:
     Farm(string);
     ~Farm();
@@ -50,6 +53,13 @@ void Farm::Sleep(){
     for(int i = 0; i < animal_types; i++){
         if(livestock[i]->Present()){
             livestock[i]->Reproduce();
+        }
+    }
+    for(int i = 0; i < 3; i++){
+        if(active_missions[i] != NULL){
+            if(active_missions[i]->NextDay()){
+                Offer(i);
+            }
         }
     }
 }
@@ -110,4 +120,17 @@ int Farm::FindId(string name){
         }
     }
     return -1;
+}
+
+void Farm::Offer(int id){
+    int animal = active_missions[id]->TranslateItem();
+    if(livestock[animal]->RemoveAnimal(active_missions[id]->DemandedQuantity())){
+        cout << "offering ";
+        active_missions[id]->DisplayQuest();
+        cout << "\tcompleted succsefully" << endl;
+    }
+    else{
+        cout << "you have failed to deliever your offering in time" << endl;
+        exit(0);
+    }
 }

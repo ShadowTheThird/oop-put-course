@@ -3,6 +3,7 @@
 using namespace std;
 
 class Gods{
+protected:
     Quest **active_missions = new Quest*[3];
     unsigned int offering_score;
 public:
@@ -33,7 +34,7 @@ bool Gods::ActiveMission(){
 }
 
 void Gods::ChooseMission(int slot){
-    Quest choices[3] = {Quest("mission1", "rabbit", 10, 5), Quest("mission1", "rabbit", 20, 10), Quest("mission1", "rabbit", 5, 2)};
+    Quest choices[3] = {Quest("mission1", "Rabbit", 10, 5), Quest("mission1", "Rabbit", 20, 10), Quest("mission1", "Rabbit", 5, 2)};
     cout << "chose your offering:" << endl;
     for(int i = 0; i < 3; i++){
         cout << "\t" << i << ". ";
