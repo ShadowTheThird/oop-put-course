@@ -1,21 +1,21 @@
 #include "Throwable.h"
 
 class Cube:public Throwable{
+    float AirResistance() override;
 public:
     Cube(float _volume, float _mass):Throwable(_volume, _mass){}
-    float AirResistance() override;
 };
 
 class Sphere:public Throwable{
+    float AirResistance() override;
 public:
     Sphere(float _volume, float _mass):Throwable(_volume, _mass){}
-    float AirResistance() override;
 };
 
 class Cone:public Throwable{
+    float AirResistance() override;
 public:
     Cone(float _volume, float _mass):Throwable(_volume, _mass){}
-    float AirResistance() override;
 };
 
 float Cube::AirResistance(){
