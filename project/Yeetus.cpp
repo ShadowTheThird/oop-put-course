@@ -19,6 +19,10 @@ int main(){
             cout << "executing process..." << endl;
             return 0;
         }
+        if(command == "help"){
+            cout << "showing help" << endl;
+            continue;
+        }
         if(command == "throw"){
             cout << "you have performed a throw" << endl;
             continue;
