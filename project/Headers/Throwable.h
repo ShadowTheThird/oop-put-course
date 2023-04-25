@@ -2,22 +2,18 @@ class Throwable{
 protected:
     float volume, mass;
     Throwable(float _volume, float _mass):volume(_volume),mass(_mass){}
+    virtual float AirResistance() = 0;
 public:
     float CalculateAngle(float, float, float);
+    float CalculateForce(float, float, float);
+    float CalculateHeight(float, float, float);
     float Throw(float, float, float);
     Throwable Redefine(float, float);
-    virtual float AirResistance() = 0;
 };
 
 float Throwable::CalculateAngle(float force, float height, float distance){
-    float unknown = 0;
-    if(force){
-        unknown = 1;
-    }
-    else{
-        unknown = 2;
-    }
-    return unknown; 
+    float angle = 0;
+    return angle;
 }
 
 float Throwable::Throw(float force, float height, float angle){
