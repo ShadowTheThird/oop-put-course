@@ -1,4 +1,6 @@
 #include "Throwable.h"
+#include "ConstantValues.h"
+#include <cmath>
 
 class Cube:public Throwable{
     float AirResistance() override;
@@ -19,12 +21,12 @@ public:
 };
 
 float Cube::AirResistance(){
-    float air_resistance = 0;
+    double air_resistance = 0;
     return air_resistance;
 }
 
 float Sphere::AirResistance(){
-    float air_resistance = 0;
+    float air_resistance = M_PI * pow(volume, 2/3.0) * sqrt(3.0 * mass/(M_PI * ConstantValues::rho));
     return air_resistance;
 }
 
