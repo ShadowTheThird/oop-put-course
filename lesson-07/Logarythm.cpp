@@ -8,25 +8,21 @@ public:
     double Calculate() const;
 private:
     double base, number;
-    bool Exception() const{
-        if(base < 0){
-            throw invalid_argument("base value below zero");
-            return false;
-        }
-        if(number == 0){
-            throw invalid_argument("number to be logarithmized is equal 0");
-            return false;
-        }
-        if(number < 0){
-            throw invalid_argument("number to be logarithmized is below 0");
-            return false;
-        }
-        return true;
-    }
 };
 
 double Logarithm::Calculate() const{
-    Exception();
+    if(base <= 0){
+        throw invalid_argument("base value below or equal zero");
+    }
+    if(number == 0){
+        throw invalid_argument("number to be logarithmized is equal 0");
+    }
+    if(number < 0){
+        throw invalid_argument("number to be logarithmized is below 0");
+    }
+    if(number == 1 && base == 1){
+        throw invalid_argument("number and base cannot be equal to 1");
+    }
     return log(number)/log(base);
 }
 
