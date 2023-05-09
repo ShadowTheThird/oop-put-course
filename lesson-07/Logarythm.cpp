@@ -5,10 +5,10 @@ using namespace std;
 class Logarithm{
 public:
     Logarithm(double _base, double _number):base(_base),number(_number){}
-    double Calculate();
+    double Calculate() const;
 private:
     double base, number;
-    bool Exception(){
+    bool Exception() const{
         if(base < 0){
             cout << "base value below zero";
             return false;
@@ -25,7 +25,7 @@ private:
     }
 };
 
-double Logarithm::Calculate(){
+double Logarithm::Calculate() const{
     if(Exception()){
         return log(number)/log(base);
     }
