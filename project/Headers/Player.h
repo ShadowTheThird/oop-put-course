@@ -4,13 +4,15 @@
 #include "Moves.h"
 using namespace std;
 
-class Player: protected Entity{
+class Player: public Entity{
 protected:
     int level;
 public:
     Player(string _name, int difficulty):Entity(difficulty==1?100:difficulty==2?75:difficulty==3?50:0, difficulty==1?20:difficulty==2?15:difficulty==3?10:0, _name, 4), level(1){available_moves[moves_count++] = 0; available_moves[moves_count++] = 4;}
+    Player(int _hp, int _dmg, string _name, int _moves_count, int _level):Entity(_hp, _dmg, _name, _moves_count), level(_level){}
     int EnemyLevel();
     void Inspect();
+    bool KnowsSkill(short);
     void PlayerSkills(Moves);
     void operator++(int);
 };
@@ -20,7 +22,14 @@ int Player::EnemyLevel(){
 }
 
 void Player::Inspect(){
-    cout << "\t" << name << " has " << hp << " hp and " << dmg << " dmg" << endl;
+    cout << "\t" << name << " is level " << level << " and has " << hp << "hp and " << dmg << "dmg" << endl;
+}
+
+bool Player::KnowsSkill(short id){
+    if(id >= 0 && id < moves_count){
+        return true;
+    }
+    return false;
 }
 
 void Player::PlayerSkills(Moves temp){
@@ -30,6 +39,7 @@ void Player::PlayerSkills(Moves temp){
 }
 
 void Player::operator++(int i){
-    hp += 10;
-    dmg += 2;
+    hp += 20;
+    dmg += 4;
+    level++;
 }
