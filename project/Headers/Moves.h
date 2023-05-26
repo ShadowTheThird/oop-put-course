@@ -18,11 +18,21 @@ public:
         skills.push_back(Skill("bonk", false, 0.5, 0.15));
         skills.push_back(Skill("destroy", false, 1.5, 0));
         skills.push_back(Skill("medicate", true, -0.25, 0.25));
-        skills.push_back(Skill("heal", true, -0.75, -0.2));
+        skills.push_back(Skill("heal", true, -0.5, 0));
     }
+    int AmplifyDmg(short, int);
     bool IsHealing(short);
     string SkillName(short);
 };
+
+int Moves::AmplifyDmg(short id, int damage){
+    float roll = rand()%100 * 0.01;
+    damage *= skills[id].dmg_modifier;
+    if(roll < skills[id].crit_chance){
+        damage *= 2;
+    }
+    return damage;
+}
 
 bool Moves::IsHealing(short id){
     if(skills[id].dmg_modifier < 0){
