@@ -2,8 +2,9 @@
 #include <iostream>
 #include <string>
 #include "Headers\Player.h"
-#include "Headers\Enemy.h"
 using namespace std;
+
+Moves temp;
 
 string Lower(string text){
     string lower_text = "";
@@ -22,6 +23,6 @@ int main(){
     cin >> difficulty;
     Player player(command, difficulty);
     if(!player.IsDead()){
-        cout << "\tAll good so far";
+        player.PlayerSkills(temp);
     }
 }
