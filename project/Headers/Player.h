@@ -4,10 +4,13 @@
 using namespace std;
 
 class Player: protected Entity{
+protected:
+    int level;
 public:
-    Player(string _name, int difficulty):Entity(difficulty==1?100:difficulty==2?75:difficulty==3?50:0, difficulty==1?20:difficulty==2?15:difficulty==3?10:0, _name, 4){available_moves[moves_count++] = 0; available_moves[moves_count++] = 4;}
+    Player(string _name, int difficulty):Entity(difficulty==1?100:difficulty==2?75:difficulty==3?50:0, difficulty==1?20:difficulty==2?15:difficulty==3?10:0, _name, 4), level(0){available_moves[moves_count++] = 0; available_moves[moves_count++] = 4;}
     bool IsDead();
     void PlayerSkills(Moves);
+
 };
 
 bool Player::IsDead(){
