@@ -1,3 +1,4 @@
+#include <cmath>
 #include <string>
 #include "Entity.h"
 #include "Moves.h"
@@ -7,21 +8,28 @@ class Player: protected Entity{
 protected:
     int level;
 public:
-    Player(string _name, int difficulty):Entity(difficulty==1?100:difficulty==2?75:difficulty==3?50:0, difficulty==1?20:difficulty==2?15:difficulty==3?10:0, _name, 4), level(0){available_moves[moves_count++] = 0; available_moves[moves_count++] = 4;}
-    bool IsDead();
+    Player(string _name, int difficulty):Entity(difficulty==1?100:difficulty==2?75:difficulty==3?50:0, difficulty==1?20:difficulty==2?15:difficulty==3?10:0, _name, 4), level(1){available_moves[moves_count++] = 0; available_moves[moves_count++] = 4;}
+    int EnemyLevel();
+    void Inspect();
     void PlayerSkills(Moves);
-
+    void operator++(int);
 };
 
-bool Player::IsDead(){
-    if(hp <= 0){
-        return true;
-    }
-    return false;
+int Player::EnemyLevel(){
+    return ceil(level/5.0);
+}
+
+void Player::Inspect(){
+    cout << "\t" << name << " has " << hp << " hp and " << dmg << " dmg" << endl;
 }
 
 void Player::PlayerSkills(Moves temp){
     for(int i = 0; i < moves_count; i++){
         cout << "\t" << i+1 << ". " << temp.SkillName(available_moves[i]) << endl;
     }
+}
+
+void Player::operator++(int i){
+    hp += 10;
+    dmg += 2;
 }
