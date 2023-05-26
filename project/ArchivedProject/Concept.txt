@@ -1,2 +1,0 @@
-Small console based game with command control where you are an owner of an animal farm and you are responsible for animal breeding,
-but the gods of your world are constantly requiring offering which you must provide.
