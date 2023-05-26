@@ -5,6 +5,7 @@
 using namespace std;
 
 Moves temp;
+Enemies enemy_database;
 
 string Lower(string text){
     string lower_text = "";
@@ -24,12 +25,26 @@ int main(){
     // Player player(command, difficulty);
     Player player("test", 2);
     cout << "\tInput \"help\" for control manual" << endl;
-    getline(cin, command);
+    // getline(cin, command);
     while(true){
         getline(cin, command);
         command = Lower(command);
         if(command.substr(0, 4) == "help"){
             Command::Help();
+            continue;
+        }
+        if(command.substr(0, 5) == "fight"){
+            Entity enemy = Command::Fight(player, enemy_database);
+            if(Command::Skirmish(player, enemy)){
+                player++;
+            }
+            else{
+                cout << "\tGame over. Your character is dead";
+            }
+            continue;
+        }
+        if(command.substr(0, 7) == "inspect"){
+            Command::Inspect(player);
             continue;
         }
         if(command.substr(0, 5) == "skill"){
