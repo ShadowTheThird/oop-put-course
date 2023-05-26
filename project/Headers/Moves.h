@@ -1,3 +1,4 @@
+#include <cmath>
 #include <string>
 #include <vector>
 using namespace std;
@@ -14,7 +15,7 @@ private:
 public:
     Moves(){
         skills.push_back(Skill("attack", false, 1, 0.1));
-        skills.push_back(Skill("strike", false, 0.9, 0.25));
+        skills.push_back(Skill("strike", false, 0.9, 0.15));
         skills.push_back(Skill("bonk", false, 0.5, 0.15));
         skills.push_back(Skill("destroy", false, 1.5, 0));
         skills.push_back(Skill("medicate", true, -0.25, 0.25));
@@ -31,7 +32,7 @@ int Moves::AmplifyDmg(short id, int damage){
     if(roll < skills[id].crit_chance){
         damage *= 2;
     }
-    return damage;
+    return ceil(damage);
 }
 
 bool Moves::IsHealing(short id){
