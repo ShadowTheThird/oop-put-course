@@ -17,15 +17,15 @@ string Lower(string text){
 
 int main(){
     string command;
-    // cout << "\tWelcome to rpg minigame!" << endl << "\tInput your player name" << endl;
-    // getline(cin, command);
-    // cout << "\tInput preffered difficulty:\n\t1. Easy\n\t2. Normal\n\t3. Hard" << endl;
-    // int difficulty;
-    // cin >> difficulty;
-    // Player player(command, difficulty);
-    Player player("test", 2);
+    cout << "\tWelcome to rpg minigame!" << endl << "\tInput your player name" << endl;
+    getline(cin, command);
+    cout << "\tInput preffered difficulty:\n\t1. Easy\n\t2. Normal\n\t3. Hard" << endl;
+    int difficulty;
+    cin >> difficulty;
+    Player player(command, difficulty);
+    // Player player("test", 1);
     cout << "\tInput \"help\" for control manual" << endl;
-    // getline(cin, command);
+    getline(cin, command);
     while(true){
         getline(cin, command);
         command = Lower(command);
@@ -34,12 +34,14 @@ int main(){
             continue;
         }
         if(command.substr(0, 5) == "fight"){
-            Entity enemy = Command::Fight(player, enemy_database);
-            if(Command::Skirmish(player, enemy)){
+            Enemy enemy = Command::Fight(player, enemy_database);
+            if(Command::Skirmish(player, enemy, temp)){
+                getline(cin, command);
                 player++;
             }
             else{
                 cout << "\tGame over. Your character is dead";
+                return 0;
             }
             continue;
         }
