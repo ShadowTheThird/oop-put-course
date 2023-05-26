@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include "Entity.h"
 using namespace std;
 
 class Moves{

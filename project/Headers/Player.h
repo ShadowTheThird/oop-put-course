@@ -1,4 +1,5 @@
 #include <string>
+#include "Entity.h"
 #include "Moves.h"
 using namespace std;
 
